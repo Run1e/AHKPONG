@@ -13,7 +13,7 @@ global MaxFPS := 0
 	, PaddleWidth := 10
 	, MinDeltaTime := 1/MaxFPS
 	, Player, Enemy, Ball
-	, Delta, FPSCounter, CurrentTime
+	, Delta, FPSCounter := 0, CurrentTime
 
 DllCall("QueryPerformanceFrequency", "Int64P", QPF)
 
@@ -32,6 +32,7 @@ Player.MoveTo(Width / 10, Height / 2 - Player.Pos.4 / 2)
 Enemy := new AIEntity(PaddleWidth * Scale, PaddleHeight * Scale)
 Enemy.MoveTo(Width / 10 * 9 - Enemy.Pos.3, Height / 2 - Enemy.Pos.4 / 2)
 
+gosub FPSCounter
 SetTimer, FPSCounter, 1000
 DllCall("QueryPerformanceCounter", "Int64P", CurrentTime)
 
@@ -93,5 +94,5 @@ ExitApp
 #Include lib\Class Entity.ahk
 #Include lib\Class BallEntity.ahk
 #Include lib\Class PaddleEntity.ahk
-#Include lib\Functions.ahk
 #Include lib\Class AIEntity.ahk
+#Include lib\Functions.ahk
